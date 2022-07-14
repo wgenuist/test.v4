@@ -1,0 +1,83 @@
+base = '2014-03-07' for 1 week
+
+broadband router: all = base (11 to remove)
+food processor: all = '2014-06-07' (20 to remove)
+games console: all =  base
+dish washer: all = '2014-04-11' (11 to removed)
+washer dryer: all = base
+unknown: all = '2014-06-07'
+freezer: all = '2014-06-07'
+breadmaker: all = base
+dehumidifier: all = base
+toaster: all = all ='2014-10-14' (12 to remove)
+kettle: all = all = '2014-10-07'
+tumble dryer: all = '2014-08-07'
+electric space heater: all = '2014-07-07' (1 to remove)
+computer: all = '2014-10-14'
+audio system: all = '2014-10-07' (1 to remove, 14 is too high)
+pond pump: all = '2014-03-07'
+television: all = '2014-11-10' (12 to remove)
+fridge: all = '2014-08-13'
+microwave: all = '2014-10-07'
+fridge freezer: all = '2014-10-07'
+washing machine: all = 2014-12-10'
+appliance: all = '2014-04-03'
+fan: all = base
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

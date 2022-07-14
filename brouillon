@@ -1,0 +1,65 @@
+import nilmtk
+from nilmtk import DataSet
+
+nilmtk.Appliance.allow_synonyms = False
+
+REFIT_path = "/Users/wilfriedgenuist/PycharmProjects/desagregation/datasets/REFIT/REFIT.h5"
+
+ds = DataSet(REFIT_path)
+building_ids = set([building_id for building_id in ds.buildings.keys()])
+data = {'buildings_ids': building_ids, 'buildings_appliances': {}, }
+
+sample_s = 7
+physical = ('power', 'active', )
+load_kwargs = {'physical_quantity': physical[0], 'ac_type': physical[1], 'sample_period': sample_s, }
+
+#for b_id in data['buildings_ids']:
+
+
+for b_id in [1]:
+    print("Loading {}, building {}".format(ds.metadata['name'], b_id))
+    elec, b = ds.buildings[b_id].elec, 'building'+str(b_id)
+    data['buildings_appliances'][b], data[b] = [str(elec[i+2].appliances).split("'")[1] for i in
+                                                range(len(elec.appliances))], {}
+
+    data[b], data[b]['mains'] = {}, next(elec.mains().load(**load_kwargs))
+    for appliance in data['buildings_appliances'][b]:
+
+        appgen = elec[appliance].load(**load_kwargs)
+        data[b][appliance] = next(appgen)
+
+
+# metadata du dataset
+# charger chaque batiment et demander les meters
+
+print('---end---')
+
+
+
+
+#######
+
+
+
+    # scaling back values
+
+
+    # graph for visuals
+    t, delta_t = 4700 + 250 + 2000, 3600
+
+    plt.plot(np.array(unscaled_values['mains'])[t: t + delta_t], 'b')
+    plt.plot(np.array(unscaled_values[appliance])[t: t + delta_t], 'g')
+    plt.plot(np.array(unscaled_values_output[appliance])[t: t + delta_t], 'r')
+    plt.legend(['Main consumption', 'Reference for ' + appliance, 'Algorithm output for ' + appliance])
+    plt.title('Test for ' + house_test)
+
+    if save == 'ON':
+        plt.savefig(graph_location + experience_title + '/' + appliance + '.png')
+    plt.show()
+
+    # score calculation
+    f1s[m] = nilm_f1score(unscaled_values[appliance], unscaled_values_output[appliance])
+    maes[m] = mean_absolute_error(unscaled_values[appliance], unscaled_values_output[appliance])
+    m = m + 1
+
+barchart(f1s, maes, APPLIANCES, graph_location, experience_title, save)
